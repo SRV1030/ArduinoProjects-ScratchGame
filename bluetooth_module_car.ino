@@ -1,53 +1,56 @@
-char str[2];
-char c;
-char z;
-#define L1 2
-#define L2 3
-#define M1 4
-#define M2 5
-
-void rt()
-{digitalWrite(L1,HIGH);
-digitalWrite(L2,LOW);
-digitalWrite(M1,HIGH);
-digitalWrite(M2,LOW);}
-void lt()
-{digitalWrite(L1,LOW);
-digitalWrite(L2,HIGH);
-digitalWrite(M1,LOW);
-digitalWrite(M2,HIGH);}
-void fw()
-{digitalWrite(L1,HIGH);
-digitalWrite(L2,LOW);
-digitalWrite(M1,LOW);
-digitalWrite(M2,HIGH);}
-void bk()
-{digitalWrite(L1,LOW);
-digitalWrite(L2,HIGH);
-digitalWrite(M1,HIGH);
-digitalWrite(M2,LOW);}
-
-void setup(){
+#define m11 12    
+#define m12 11
+#define m21 10    
+#define m22 9
+char str[2],i;
+void forward(){
+digitalWrite(m11, LOW);
+digitalWrite(m12, HIGH);
+digitalWrite(m21, HIGH);
+digitalWrite(m22, LOW);}
+void backward()
+{digitalWrite(m11, HIGH);
+digitalWrite(m12, LOW);
+digitalWrite(m21, LOW);
+digitalWrite(m22, HIGH);}
+void left(){
+digitalWrite(m11, HIGH);
+digitalWrite(m12, LOW);
+digitalWrite(m21, HIGH);
+digitalWrite(m22, LOW);}
+void right(){
+digitalWrite(m11, LOW);
+digitalWrite(m12, HIGH);
+digitalWrite(m21, LOW);
+digitalWrite(m22, HIGH);}
+void Stop(){
+digitalWrite(m11, LOW);
+digitalWrite(m12, LOW);
+digitalWrite(m21, LOW);
+digitalWrite(m22, LOW);}
+void setup() {
 Serial.begin(9600);
-pinMode(2,OUTPUT);
-pinMode(3,OUTPUT);
-pinMode(4,OUTPUT);
-pinMode(5,OUTPUT);
-pinMode(6,OUTPUT);}
-void loop()
-{while(Serial.available())
-{char c=Serial.read();
- if(c=='u')
-{fw();
+pinMode(m11, OUTPUT);
+pinMode(m12, OUTPUT);
+pinMode(m21, OUTPUT);
+pinMode(m22, OUTPUT);}
+void loop(){
+while(Serial.available())
+{char ch=Serial.read();
+if(ch=='1')
+{Serial.println("Forward");
+forward();
 break;}
-else if(c=='l')
-{lt();
+else if(ch=='2')
+{Serial.println("Left");
+right();
 break;}
-else if(c=='r')
-{rt();
-break;}
-else if(c=='d')
-{bk();
-break;}
-}}
+else if(ch=='3')
+{Serial.println("Right");
+left();
+ break;}    
+else if(ch=='4')
+{Serial.println("Backward");
+backward();
+i=0;}}
 
